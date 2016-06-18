@@ -1,6 +1,7 @@
 version: '2'
 services:
   web:
+    restart: always
     image: nginx:latest
     ports:
       - "80:80"
@@ -17,6 +18,7 @@ services:
 
 
   php:
+    restart: always
     build: config/php/image
     volumes:
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
@@ -40,6 +42,7 @@ services:
 
 
   mysql:
+    restart: always
     image: mysql:5.6
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
@@ -49,6 +52,7 @@ services:
     volumes:
       - magento2mysqldata:/var/lib/mysql
       - ./config/mysql/custom-entrypoint.sh:/custom-entrypoint.sh
+      - ./config/mysql/my.cnf:/etc/mysql/my.cnf
     entrypoint: /bin/sh /custom-entrypoint.sh
 
   cache:

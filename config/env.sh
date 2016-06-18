@@ -18,7 +18,7 @@ export ADMIN_EMAIL="johndoe@example.com"
 export ADMIN_PASSWORD="enAVINa2"
 
 export DEFAULT_LANGUAGE="en_US"
-export DEFAULT_CURRENCY="EUR"
-export DEFAULT_TIMEZONE="Europe/Berlin"
+export DEFAULT_CURRENCY="USD"
+export DEFAULT_TIMEZONE="America/Chicago"
 
 export BACKEND_FRONTNAME="management"
