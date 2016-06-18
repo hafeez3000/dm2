@@ -1,7 +1,6 @@
 version: '2'
 services:
   web:
-    restart: always
     image: nginx:latest
     ports:
       - "80:80"
@@ -18,7 +17,6 @@ services:
 
 
   php:
-    restart: always
     build: config/php/image
     volumes:
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
@@ -30,7 +28,15 @@ services:
       - appdata
       - mysql
       - cache
+      - elasticsearch
     user: www-data
+
+  elasticsearch:
+    image: elasticsearch:latest
+    command: elasticsearch -Des.network.host=0.0.0.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
 
 
   appdata:
@@ -42,8 +48,7 @@ services:
 
 
   mysql:
-    restart: always
-    image: mysql:5.6
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DATABASE_NAME}
