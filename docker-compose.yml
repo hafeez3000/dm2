@@ -25,7 +25,7 @@ services:
       - ./config/varnish/default.vcl:/etc/varnish/default.vcl
       - ./config/varnish/varnish.secret:/etc/varnish/secret
     environment:
-      - CACHE_SIZE=256M
+      - CACHE_SIZE=2560M
 
 
   php:
@@ -55,10 +55,10 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USER}
-      MYSQL_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: enAVINa2
+      MYSQL_DATABASE: magento2dockerized
+      MYSQL_USER: magento
+      MYSQL_PASSWORD: enAVINa2
     volumes:
       - magento2mysqldata:/var/lib/mysql
       - ./config/mysql/custom-entrypoint.sh:/custom-entrypoint.sh
@@ -66,7 +66,9 @@ services:
     entrypoint: /bin/sh /custom-entrypoint.sh
 
   cache:
-    image: redis:latest
+    image: redis:3.2.1-alpine
+    volumes:
+      - ./var/redis:/data
 
 
   elasticsearch:
